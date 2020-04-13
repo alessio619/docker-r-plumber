@@ -4,84 +4,22 @@
 
 This repository was created for educational purposes. Present image will generate the Plumber API which will broadcast information via the Docker network. Another container linked to the same network will be able to read this information.
 
-# Usage for demonstration
+# Branch dev_step1
 
-## Preparation
+This branch dev_step1 is describing steps to develop API code using R-Studio in the docker container
 
-1. Clone the following repositories:
+## Development Steps
 
-* https://github.com/vladdsm/shiny-merkle-tree -> LOCAL_FOLDERA
-* https://github.com/vladdsm/docker-r-plumber -> LOCAL_FOLDERB
+1. Create a new folder e.g. docker-r-plumber
+2. Add a version control to this folder
+3. Copy and Paste a script `Run_RStudio` to this folder. See: https://github.com/vladdsm/docker-r-studio
+4. Edit this script by Mapping newly created folder to RStudio environment, e.g.:
 
-2. Edit the file 'Run_Plumber':
+We use mapping as follows: `-v [LocalFolder]:[ContainerFolder]`. This is current example: `-v /Users/vladdsm/Documents/GitHub/docker-r-plumber:/home/myself/r-studio/docker-r-plumber`
 
-* replace default user/passwords
-* change name of the Local folders  `-v [LOCAL_FOLDERA]:[...]` and `-v [LOCAL_FOLDERB]:[...]`
-
-## Start Demo
-
-Launch the executable file belonging to this repo `Run_Plumber` this starts:
-
-* Container with R Plumber API
-* Container Network
-* 2 Containers with R Studio IDE
-
-## End User Space (Shiny App is not in it's own container yet)
-
-Purpose: write all relevant logic relevant to the End User e.g. deploy the GUI App
-
-Access: Safari browser http://localhost:8787
-
-Use: Launch the App that can be found in the mapped folder A
-
-## Developer Space
-
-Purpose: write all relevant logic relevant e.g. prepare and test the API
-
-Access: Chrome browser http://localhost:8797
-
-Use: Launch the Plumber API that can be found in the mapped folder B
-
-## Published API on it's own container see vladdsm/docker-r-plumber
-
-Purpose: deploy Plumber API 
-
-Access: via REST API GET calls from the Shiny Web App...
-
-Use: press button 'Config' in the Shiny App
-
-## End Demo:
-
-Launch the executable file `Stop_Plumber` (this will stop all the containers as well as remove the network)
-
-# Connecting Containers [Testing]
-
-This chapter is dedicated to note down the procedure that helps to understand if the docker network is working
-
-## Identify docker network IP address
-
-* from Terminal we execute command to understand actors in the network `my-net` `docker network inspect my-net`
-* resulting output is the ip addresses of the containers:
-API - 172.23.0.4
-Prod - 172.23.0.3
-Dev - 172.23.0.2
-Gateway - 172.23.0.1
-Subnet - 172.23.0.0
-
-## Ping containers
-
-* ping API from Prod (RStudio Terminal) e.g. `ping 172.23.0.1`
-* execute API GET request:
--- URL: 172.23.0.4:8797
--- Endpoint: hash_unit
-* result - OK
-
-## Use Docker Network Name instead of IP address
-
-The IP address of the network [172.xx.0.y] is always increasing. Every time we will restart docker engine xx value will start from 18... so to insure the right url will be used for GET request we can use the network name which was specified as 'API'. URL for the GET request will be:
-`url <- "API:8797/[endpoint]"`
-
-
-
-
-
+5. Launch docker container with R Studio by 2 clicking to the script Run_RStudio
+6. Access the IDE using your browser with http://localhost:8787
+7. Develop the API code, create your script in the same folder e.g. /docker-r-plumber/02_code
+8. Test with Swagger
+9. Save and commit your work to the version control
+10. Stop container with R-Studio by pressing CTRL+C in the active Terminal window

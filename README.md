@@ -26,7 +26,7 @@ Creating docker network
 * Container Network
 * Containers with R Studio IDE
 
-7. Access Developer Space with Chrome browser http://localhost:8797
+7. Access Developer Space with Chrome browser http://localhost:8787
 
 8. Stop everything by executing script `Stop_Plumber`. This will stop active containers and remove the network:
 

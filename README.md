@@ -29,11 +29,13 @@ Dev - 172.23.0.2
 Gateway - 172.23.0.1
 Subnet - 172.23.0.0
 
+Note that these IP addresses are not static this is why we are using aliases e.g. `API`, `Dev` or `Prod` to specify names of containers in the network
+
 3.1. Launch R-Studio with Safari browser http://localhost:8787
 3.2. Launch R-Studio with Chrome browser http://localhost:8797
 3.3. Ping network
 
-* ping API from Prod (RStudio Terminal) e.g. `ping 172.23.0.1`
+* ping API from Prod (RStudio Terminal) e.g. `ping 172.23.0.1` or `ping API`...
 
 4. Stop containers and remove networks
 
